@@ -17,7 +17,7 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
     private var volumeLevelsCount: Int? = null
     private var currentVolumeLevel: Int? = null
 
-    private fun init() {
+    init {
         barPaint = Paint()
         barPaint?.color = Color.MAGENTA
 
@@ -89,10 +89,6 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
     fun setVolumeLevel(volumeLevel: Int) {
         currentVolumeLevel = volumeLevel
         invalidate()
-    }
-
-    init {
-        init()
     }
 
 }
