@@ -9,8 +9,12 @@ import android.view.View
 
 class VolumeBarView : View {
 
+    private val barHeightRatio = 0.6F
+
     private var barPaint: Paint? = null
+    private var highlightedBarPaint: Paint? = null
     private var thumbPaint: Paint? = null
+
     private var defaultBarWidth: Int? = null
     private var defaultBarHeight: Int? = null
 
@@ -27,10 +31,13 @@ class VolumeBarView : View {
 
     private fun init() {
         barPaint = Paint()
-        barPaint?.color = Color.MAGENTA
+        barPaint?.color = Color.GRAY
+
+        highlightedBarPaint = Paint()
+        highlightedBarPaint?.color = Color.RED
 
         thumbPaint = Paint()
-        thumbPaint?.color = Color.GREEN
+        thumbPaint?.color = Color.RED
 
         defaultBarWidth = resources.getDimensionPixelSize(R.dimen.volume_bar_default_width)
         defaultBarHeight = resources.getDimensionPixelSize(R.dimen.volume_bar_default_height)
@@ -61,18 +68,42 @@ class VolumeBarView : View {
     }
 
     override fun onDraw(canvas: Canvas?) {
-        drawBar(canvas)
-        drawThumb(canvas)
-    }
-
-    private fun drawBar(canvas: Canvas?) {
-        canvas?.drawRect(0.0F, 0.0F, width.toFloat(), height.toFloat(), barPaint)
-    }
-
-    private fun drawThumb(canvas: Canvas?) {
         val thumbX = calculateThumbX()
-        val thumbY = height.toFloat() / 2.0F
-        val radius = height.toFloat() / 2.0F
+        drawBar(canvas, thumbX)
+        drawThumb(canvas, thumbX)
+    }
+
+    private fun drawBar(canvas: Canvas?, thumbX: Float) {
+        val halfOfHeight = height / 2.0F
+
+        val bottom = height * barHeightRatio
+        val top = height - bottom
+
+        val rightOfNormal = width.toFloat() - halfOfHeight
+        val leftOfHighlighted = 0.0F + halfOfHeight
+
+        canvas?.drawRoundRect(
+                thumbX,
+                top,
+                rightOfNormal,
+                bottom,
+                halfOfHeight,
+                halfOfHeight,
+                barPaint)
+
+        canvas?.drawRoundRect(
+                leftOfHighlighted,
+                top,
+                thumbX,
+                bottom,
+                halfOfHeight,
+                halfOfHeight,
+                highlightedBarPaint)
+    }
+
+    private fun drawThumb(canvas: Canvas?, thumbX: Float) {
+        val thumbY = height / 2.0F
+        val radius = height / 2.0F
 
         canvas?.drawCircle(thumbX, thumbY, radius, thumbPaint)
     }
