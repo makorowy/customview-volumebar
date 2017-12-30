@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 
-class VolumeBarView : View {
+class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     private var barPaint: Paint? = null
     private var thumbPaint: Paint? = null
@@ -16,14 +16,6 @@ class VolumeBarView : View {
 
     private var volumeLevelsCount: Int? = null
     private var currentVolumeLevel: Int? = null
-
-    constructor(context: Context) : super(context) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        init()
-    }
 
     private fun init() {
         barPaint = Paint()
@@ -97,6 +89,10 @@ class VolumeBarView : View {
     fun setVolumeLevel(volumeLevel: Int) {
         currentVolumeLevel = volumeLevel
         invalidate()
+    }
+
+    init {
+        init()
     }
 
 }
