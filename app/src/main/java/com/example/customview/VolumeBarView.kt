@@ -14,7 +14,7 @@ class VolumeBarView : View {
     private var defaultBarWidth: Int? = null
     private var defaultBarHeight: Int? = null
 
-    private var volumeLevelWidth: Int? = null
+    private var volumeLevelsCount: Int? = null
     private var currentVolumeLevel: Int? = null
 
     constructor(context: Context) : super(context) {
@@ -78,7 +78,7 @@ class VolumeBarView : View {
     }
 
     private fun calculateThumbX(): Float {
-        val volumeLevelWidth = this.volumeLevelWidth
+        val volumeLevelWidth = this.volumeLevelsCount
         val currentVolumeLevel = this.currentVolumeLevel
 
         return if (volumeLevelWidth != null && currentVolumeLevel != null) {
@@ -89,7 +89,7 @@ class VolumeBarView : View {
     }
 
     fun calibrateVolumeLevels(volumeLevelsCount: Int, currentVolumeLevel: Int) {
-        this.volumeLevelWidth = volumeLevelsCount
+        this.volumeLevelsCount = volumeLevelsCount
         this.currentVolumeLevel = currentVolumeLevel
         invalidate()
     }
