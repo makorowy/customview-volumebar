@@ -72,17 +72,17 @@ class VolumeBarView : View {
     private fun drawThumb(canvas: Canvas?) {
         val thumbX = calculateThumbX()
         val thumbY = height.toFloat() / 2.0F
-        val radius = height.toFloat() / 2
+        val radius = height.toFloat() / 2.0F
 
         canvas?.drawCircle(thumbX, thumbY, radius, thumbPaint)
     }
 
     private fun calculateThumbX(): Float {
-        val volumeLevelWidth = this.volumeLevelsCount
+        val volumeLevelsCount = this.volumeLevelsCount
         val currentVolumeLevel = this.currentVolumeLevel
 
-        return if (volumeLevelWidth != null && currentVolumeLevel != null) {
-            (width / volumeLevelWidth * currentVolumeLevel).toFloat()
+        return if (volumeLevelsCount != null && currentVolumeLevel != null) {
+            ((width - height) / volumeLevelsCount * currentVolumeLevel).toFloat() + height / 2.0F
         } else {
             0.0F
         }
