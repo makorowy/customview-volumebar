@@ -6,6 +6,7 @@
     tools:context="com.example.customview.MainActivity">
 
     <com.example.customview.VolumeBarView
+        android:id="@+id/volumeBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
