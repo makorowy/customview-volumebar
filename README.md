@@ -8,6 +8,7 @@ There are two versions of it:
 
 2. The second one is also a custom volume bar, but much nicer. You can find it on the _delightful_ branch.
 
-<div align="center><a href="https://imgflip.com/gif/21wztb"><img src="https://i.imgflip.com/21wztb.gif" title="made at imgflip.com"/></a></div>
+<div align="center"><a href="https://imgflip.com/gif/21wztb"><img src="https://i.imgflip.com/21wztb.gif" title="made at imgflip.com"/></a></div>
+
 
 If you want to know about all of the things that are happening in the code, you can read my article about it: [How to draw a custom View?](https://proandroiddev.com/how-to-draw-a-custom-view-9da8016fe94)
