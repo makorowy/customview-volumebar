@@ -19,8 +19,8 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
     private var currentVolumeLevel: Int? = null
 
     init {
-        barPaint.color = Color.MAGENTA
-        thumbPaint.color = Color.GREEN
+        barPaint.color = Color.GRAY
+        thumbPaint.color = Color.RED
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
