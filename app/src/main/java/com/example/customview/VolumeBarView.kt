@@ -10,7 +10,7 @@ import android.view.View
 class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     private val barPaint = Paint()
-    private var thumbPaint = Paint()
+    private val thumbPaint = Paint()
 
     private val defaultBarWidth = resources.getDimensionPixelSize(R.dimen.volume_bar_default_width)
     private val defaultBarHeight = resources.getDimensionPixelSize(R.dimen.volume_bar_default_height)
