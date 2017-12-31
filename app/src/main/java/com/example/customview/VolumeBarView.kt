@@ -9,23 +9,18 @@ import android.view.View
 
 class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
-    private var barPaint: Paint? = null
-    private var thumbPaint: Paint? = null
-    private var defaultBarWidth: Int? = null
-    private var defaultBarHeight: Int? = null
+    private val barPaint = Paint()
+    private var thumbPaint = Paint()
+
+    private val defaultBarWidth = resources.getDimensionPixelSize(R.dimen.volume_bar_default_width)
+    private val defaultBarHeight = resources.getDimensionPixelSize(R.dimen.volume_bar_default_height)
 
     private var volumeLevelsCount: Int? = null
     private var currentVolumeLevel: Int? = null
 
     init {
-        barPaint = Paint()
-        barPaint?.color = Color.MAGENTA
-
-        thumbPaint = Paint()
-        thumbPaint?.color = Color.GREEN
-
-        defaultBarWidth = resources.getDimensionPixelSize(R.dimen.volume_bar_default_width)
-        defaultBarHeight = resources.getDimensionPixelSize(R.dimen.volume_bar_default_height)
+        barPaint.color = Color.MAGENTA
+        thumbPaint.color = Color.GREEN
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -49,24 +44,24 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
             else -> defaultBarHeight
         }
 
-        setMeasuredDimension(width!!, height!!)
+        setMeasuredDimension(width, height)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         drawBar(canvas)
         drawThumb(canvas)
     }
 
-    private fun drawBar(canvas: Canvas?) {
-        canvas?.drawRect(0.0F, 0.0F, width.toFloat(), height.toFloat(), barPaint)
+    private fun drawBar(canvas: Canvas) {
+        canvas.drawRect(0.0F, 0.0F, width.toFloat(), height.toFloat(), barPaint)
     }
 
-    private fun drawThumb(canvas: Canvas?) {
+    private fun drawThumb(canvas: Canvas) {
         val thumbX = calculateThumbX()
         val thumbY = height.toFloat() / 2.0F
         val radius = height.toFloat() / 2.0F
 
-        canvas?.drawCircle(thumbX, thumbY, radius, thumbPaint)
+        canvas.drawCircle(thumbX, thumbY, radius, thumbPaint)
     }
 
     private fun calculateThumbX(): Float {
