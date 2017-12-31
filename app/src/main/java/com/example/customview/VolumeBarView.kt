@@ -11,28 +11,20 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
 
     private val barHeightRatio = 0.6F
 
-    private var barPaint: Paint? = null
-    private var highlightedBarPaint: Paint? = null
-    private var thumbPaint: Paint? = null
+    private val barPaint = Paint()
+    private val thumbPaint = Paint()
+    private val highlightedBarPaint = Paint()
 
-    private var defaultBarWidth: Int? = null
-    private var defaultBarHeight: Int? = null
+    private val defaultBarWidth = resources.getDimensionPixelSize(R.dimen.volume_bar_default_width)
+    private val defaultBarHeight = resources.getDimensionPixelSize(R.dimen.volume_bar_default_height)
 
     private var volumeLevelsCount: Int? = null
     private var currentVolumeLevel: Int? = null
 
     init {
-        barPaint = Paint()
-        barPaint?.color = Color.GRAY
-
-        highlightedBarPaint = Paint()
-        highlightedBarPaint?.color = Color.RED
-
-        thumbPaint = Paint()
-        thumbPaint?.color = Color.RED
-
-        defaultBarWidth = resources.getDimensionPixelSize(R.dimen.volume_bar_default_width)
-        defaultBarHeight = resources.getDimensionPixelSize(R.dimen.volume_bar_default_height)
+        barPaint.color = Color.GRAY
+        thumbPaint.color = Color.RED
+        highlightedBarPaint.color = Color.RED
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -56,16 +48,16 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
             else -> defaultBarHeight
         }
 
-        setMeasuredDimension(width!!, height!!)
+        setMeasuredDimension(width, height)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         val thumbX = calculateThumbX()
         drawBar(canvas, thumbX)
         drawThumb(canvas, thumbX)
     }
 
-    private fun drawBar(canvas: Canvas?, thumbX: Float) {
+    private fun drawBar(canvas: Canvas, thumbX: Float) {
         val halfOfHeight = height / 2.0F
 
         val bottom = height * barHeightRatio
@@ -74,7 +66,7 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
         val rightOfNormal = width.toFloat() - halfOfHeight
         val leftOfHighlighted = 0.0F + halfOfHeight
 
-        canvas?.drawRoundRect(
+        canvas.drawRoundRect(
                 thumbX,
                 top,
                 rightOfNormal,
@@ -83,7 +75,7 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
                 halfOfHeight,
                 barPaint)
 
-        canvas?.drawRoundRect(
+        canvas.drawRoundRect(
                 leftOfHighlighted,
                 top,
                 thumbX,
@@ -93,11 +85,11 @@ class VolumeBarView(context: Context, attrs: AttributeSet?) : View(context, attr
                 highlightedBarPaint)
     }
 
-    private fun drawThumb(canvas: Canvas?, thumbX: Float) {
+    private fun drawThumb(canvas: Canvas, thumbX: Float) {
         val thumbY = height / 2.0F
         val radius = height / 2.0F
 
-        canvas?.drawCircle(thumbX, thumbY, radius, thumbPaint)
+        canvas.drawCircle(thumbX, thumbY, radius, thumbPaint)
     }
 
     private fun calculateThumbX(): Float {
