@@ -15,4 +15,4 @@ There are two versions of it:
 <br/>
 
 If you want to know about all of the things that are happening in the code, you can read my article about it: 
-[How to draw a custom View?](https://proandroiddev.com/how-to-draw-a-custom-view-9da8016fe94)
+[How to draw a custom view?](https://proandroiddev.com/how-to-draw-a-custom-view-9da8016fe94)
